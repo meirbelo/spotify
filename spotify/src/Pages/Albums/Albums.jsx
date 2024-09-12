@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Ajout pour la navigation
 
 const Albums = () => {
 
@@ -8,10 +9,13 @@ const Albums = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
+  const navigate = useNavigate(); // Hook pour naviguer vers une autre page
+
+
   const fetchAlbums = async (page, limit) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5555/albums?page=${page}&limit=${limit}`);
+      const response = await fetch(`http://localhost:2222/albums?page=${page}&limit=${limit}`);
       if (!response.ok) {
         throw new Error('Erreur lors de la récupération des albums');
       }
@@ -42,6 +46,11 @@ const Albums = () => {
     setPage(1);
   };
 
+  const handleAlbumClick = (albumId) => {
+    // Naviguer vers la page de détails de l'album
+    navigate(`/albums/${albumId}`);
+  };
+
   if (loading) {
     return <p>Chargement...</p>;
   }
@@ -49,6 +58,7 @@ const Albums = () => {
   if (error) {
     return <p>Erreur : {error}</p>;
   }
+  
 
   return (
     <div>
@@ -66,9 +76,8 @@ const Albums = () => {
 
       <ul>
         {albums.map((album) => (
-          <li key={album.id}>
+          <li key={album.id} onClick={() => handleAlbumClick(album.id)} style={{ cursor: 'pointer' }}>
             <h3>{album.name}</h3>
-            <p>{album.description}</p>
             <img src={album.cover_small} alt={album.name} />
           </li>
         ))}

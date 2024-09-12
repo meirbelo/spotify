@@ -1,4 +1,3 @@
-version: "3"
 services:
     api:
       image: matfire/spotitech
@@ -6,7 +5,7 @@ services:
         - DB_HOST=db
         - DB_PORT=3306
       ports:
-        - "5050:3000"
+        - "2222:3000"
       restart: "unless-stopped"
       depends_on:
         - db
