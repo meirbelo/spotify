@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
-const AlbumDetails = () => {
+const DetailAlbum = () => {
   const { id } = useParams();
   const [album, setAlbum] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const audioRefs = useRef([]); // Utilisation des refs pour suivre les éléments audio
+  const audioRefs = useRef([]);
 
   useEffect(() => {
     const fetchAlbumDetails = async () => {
@@ -56,15 +56,14 @@ const AlbumDetails = () => {
 
   return (
     <div>
-      <h2>Description de l'album : {album.name}</h2>
+      <h2>Description de l'album : {album.album.description}</h2>
       {album.cover && (
         <img
-          src={album.cover}
+          src={album.album.cover}
           alt={album.name}
           style={{ width: '300px', height: '300px' }}
         />
       )}
-      <p>Date de sortie : {album.release_date}</p>
       <p>Nombre de pistes : {album.tracks ? album.tracks.length : 0}</p>
 
       <h3>Liste des pistes :</h3>
@@ -94,4 +93,4 @@ const AlbumDetails = () => {
   );
 };
 
-export default AlbumDetails;
+export default DetailAlbum;

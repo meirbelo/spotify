@@ -5,6 +5,7 @@ import Home from '../Pages/Home/Home';
 import Artiste from '../Pages/Artistes/Artistes';
 import Genres from '../Pages/Genres/Genres';
 import DetailAlbum from '../Pages/DetailAlbum/DetailAlbum';
+import DetailGenre from '../Pages/DetailGenre/DetailGenre';
 
 function Router() {
     return (
@@ -14,6 +15,8 @@ function Router() {
           <Route path="/albums/:id" element={<DetailAlbum />} />
           <Route path='/artistes' element={<Artiste/>} />
           <Route path='/genres' element={<Genres/>} />
+          <Route path="/genres/:id" element={<DetailGenre />} />
+
         </Routes>
     );
 }

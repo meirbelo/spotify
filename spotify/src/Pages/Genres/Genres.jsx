@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Ajout pour la navigation
+import DetailGenre from '../DetailGenre/DetailGenre';
 
 const Genres = () => {
 
@@ -8,6 +10,10 @@ const Genres = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [hasMore, setHasMore] = useState(true); // Ajout pour gérer si plus d'artistes existent
+
+  const [selectedGenreId, setSelectedGenreId] = useState(null); // État pour stocker genreId sélectionné
+
+  const navigate = useNavigate();
 
   const fetchGenres = async (page, limit) => {
     try {
@@ -55,6 +61,11 @@ const Genres = () => {
     setLimit(Number(event.target.value));
     setPage(1); // Reset à la première page lorsqu'on change la limite
   };
+  const handleGenreClick = (genreId) => {
+    setSelectedGenreId(genreId); // Met à jour genreId dans l'état local
+    // Naviguer vers la page de détails de l'album
+    navigate(`/genres/${genreId}`);
+  };
 
   if (loading) {
     return <p>Chargement...</p>;
@@ -85,7 +96,9 @@ const Genres = () => {
       <ul>
         {genres.map((genre) => (
           <li key={genre.id}>
-            <h3>{genre.name}</h3>
+            <h3  key={genre.id}onClick={()=> handleGenreClick(genre.id) }style={{cursor: 'pointer'}}>
+              {genre.name}
+              </h3>
           </li>
         ))}
       </ul>

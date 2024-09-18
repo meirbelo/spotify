@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Ajout pour la navigation
+import { useNavigate } from 'react-router-dom';
 
 const Albums = () => {
 
@@ -9,7 +9,7 @@ const Albums = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-  const navigate = useNavigate(); // Hook pour naviguer vers une autre page
+  const navigate = useNavigate(); 
 
 
   const fetchAlbums = async (page, limit) => {
@@ -20,6 +20,7 @@ const Albums = () => {
         throw new Error('Erreur lors de la récupération des albums');
       }
       const data = await response.json();
+      console.log(data)
       setAlbums(data);
     } catch (error) {
       setError(error.message);
