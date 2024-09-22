@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Ajout pour la navigation
+
 
 const Artistes = () => {
 
@@ -7,7 +9,11 @@ const Artistes = () => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [hasMore, setHasMore] = useState(true); // Ajout pour gérer si plus d'artistes existent
+  const [hasMore, setHasMore] = useState(true);
+
+  const [selectedArtisteId, setSelectedArtisteId] = useState(null);
+
+  const navigate = useNavigate();
 
   const fetchArtistes = async (page, limit) => {
     try {
@@ -56,6 +62,10 @@ const Artistes = () => {
     setPage(1); // Reset à la première page lorsqu'on change la limite
   };
 
+  const handleArtisteClick = (artisteId) => {
+    setSelectedArtisteId(artisteId);
+    navigate(`/artists/${artisteId}`);
+  };
   if (loading) {
     return <p>Chargement...</p>;
   }
@@ -86,7 +96,7 @@ const Artistes = () => {
         {artistes.map((artiste) => (
           <li key={artiste.id}>
             <h3>{artiste.name}</h3>
-            <img src={artiste.photo} alt={artiste.name} style={{ width: '100px', height: '100px' }} />
+            <img src={artiste.photo} onClick={()=> handleArtisteClick(artiste.id)}alt={artiste.name} style={{ width: '100px', height: '100px',cursor: 'pointer' }} />
           </li>
         ))}
       </ul>

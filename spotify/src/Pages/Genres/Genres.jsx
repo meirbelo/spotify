@@ -9,9 +9,9 @@ const Genres = () => {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [hasMore, setHasMore] = useState(true); // Ajout pour gérer si plus d'artistes existent
+  const [hasMore, setHasMore] = useState(true);
 
-  const [selectedGenreId, setSelectedGenreId] = useState(null); // État pour stocker genreId sélectionné
+  const [selectedGenreId, setSelectedGenreId] = useState(null);
 
   const navigate = useNavigate();
 
