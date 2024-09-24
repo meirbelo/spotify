@@ -18,7 +18,6 @@ function Router() {
           <Route path="/artists/:id" element={<DetailArtiste/>} />
           <Route path='/genres' element={<Genres/>} />
           <Route path="/genres/:id" element={<DetailGenre />} />
-
         </Routes>
     );
 }
