@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 function Recherche() {
   const [inputValue, setInputValue] = useState('');
   const [albums, setAlbums] = useState([]);
+  const [artistes , setArtistes ] = useState([]);
 
   const fetchAlbums = async () => {
     try {
@@ -12,7 +13,6 @@ function Recherche() {
       }
 
       const data = await response.json();
-
       // Filtrer les albums en fonction de l'inputValue
       const searchAlbums = data.filter(album => album.name.includes(inputValue));
 
@@ -23,9 +23,27 @@ function Recherche() {
       console.log(error.message);
     }
   };
+  const fetchArtistes = async () => {
+    try {
+      const response = await fetch(`http://localhost:2222/artists`);
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des albums');
+      }
+      const data = await response.json();
+      // Filtrer les albums en fonction de l'inputValue
+      const searchArtistes = data.filter(artiste => artiste.name.includes(inputValue));
+
+      console.log("Artistes filtrés:", searchArtistes);
+
+      setArtistes(searchArtistes); // Met à jour avec les albums filtrés
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     fetchAlbums();
+    fetchArtistes();
   }, [inputValue]); // Re-fetch les albums chaque fois que l'inputValue change
 
   const handleChange = (e) => {
@@ -43,10 +61,22 @@ function Recherche() {
               <p key={resultSearch.id}>{resultSearch.name}</p> // Assurez-vous que chaque élément a une clé unique
             ))
           ) : (
-            <p>Aucun résultat trouvé</p>
+            <p>Aucun Albums trouvé</p>
           )
         }
       </h2>
+      <h2>
+        {
+          artistes.length > 0 ? (
+            artistes.map((resultSearch) => (
+              <p key={resultSearch.id}>{resultSearch.name}</p>
+            ))
+          ) : (
+            <p>Aucun Albums trouvé</p>
+          )
+        }
+      </h2>
+      
     </div>
   );
 }
