@@ -7,11 +7,13 @@ import Genres from '../Pages/Genres/Genres';
 import DetailAlbum from '../Pages/DetailAlbum/DetailAlbum';
 import DetailGenre from '../Pages/DetailGenre/DetailGenre';
 import DetailArtiste from '../Pages/DetailArtiste/DetailArtiste';
+import Recherche from '../Pages/Recherche/Recherche';
 
 function Router() {
     return (
         <Routes>
           <Route path='/' element={<Home/>} />
+          <Route path='/rechercher' element={<Recherche/>} />
           <Route path='/albums' element={<Albums/>} />
           <Route path="/albums/:id" element={<DetailAlbum />} />
           <Route path='/artistes' element={<Artiste/>} />

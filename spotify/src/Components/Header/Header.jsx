@@ -5,6 +5,7 @@ function Header() {
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="/rechercher">rechercher</a></li>
                     <li><a href="/albums">albums</a></li>
                     <li><a href="/artistes">artistes</a></li>
                     <li><a href="/genres">genres</a></li>
